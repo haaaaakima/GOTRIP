@@ -1,0 +1,10 @@
+.signinup{
+    color: white;
+    position: relative;
+    top: 20%;
+    left: 6%;
+
+}
+.signinup:hover{
+    color: #ffbe33;
+}

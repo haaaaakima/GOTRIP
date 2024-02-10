@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="../static/images/logo go trip.PNG" type="">
+
+  <title> GoTrip - Comparaisons </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="../static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="../static/css/responsive.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../static/css/signinsignup.css">
+  <script>
+    function checkPasswords() {
+      var pwd = document.getElementById("pwd");
+      var vpwd = document.getElementById("vpwd");
+
+      if (pwd.value !== vpwd.value) {
+        alert("Les mots de passe ne correspondent pas.");
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+  <style>
+    .navbar-nav li a {
+      font-size: 14px;
+      margin-right: 10px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .login-form input {
+      margin-bottom: 5px;
+    }
+  </style>
+  </head>
+
+  <body class="sub_page">
+
+  <div class="hero_area">
+    <div class="bg-box">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section" style="background-color: #00008b;">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="/index">
+            <span>
+              GoTrip
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index">Acceuil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/menu">Notre Catalogue</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/comparaison">Comparaison des Pays</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/book">Réservation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/formulaire/inscription">Inscription</a>
+              </li>
+            </ul>
+                  <form class="login-form" action="http://127.0.0.1:5000/logout" method="post">
+                    <input style="width: 200px ; height: 20px;" type="text" name="identifiant" placeholder="Identifiant" required>
+                    <input style="width:200px ; height: 20px;" type="password" name="password" placeholder="Mot de passe" required>
+                    <button style="display: flex; position: absolute; margin-left: 200px; height: 20px; font-size: 10px;" type="submit">Connexion</button>
+                  </form>
+            </div>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- about section -->
+
+  <section class="about_section layout_padding">
+    <div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="container" >
+      <div class="heading_container heading_center">
+      </div>
+      </br>
+      <div>
+        <div class="heading_container heading_center">
+          <p style="font-weight: 700;"> Déconnexion réussie. </p>
+            </br>
+            <p> Si vous voulez vous reconnectez, veuillez utiliser le formulaire en haut de la page. </p>
+          </br>
+          <a href="/index">Retourner à l'accueil </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+  <!-- footer section -->
+  <footer class="footer_section" style="background-color: #00008b;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 footer-col">
+          <div class="footer_contact">
+            <h4>
+              Contact
+            </h4>
+            <div class="contact_link_box">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Toulouse, France
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  0641424217
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  contact.gotrip@gmail.com
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <div class="footer_detail">
+            <a href="" class="footer-logo">
+              GoTrip
+            </a>
+            <div class="footer_social">
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <h4>
+            Horaires d'ouverture
+          </h4>
+          <p>
+            Lundi au Samedi
+          </p>
+          <p>
+            8h - 20h
+          </p>
+        </div>
+      </div>
+      <div class="footer-info">
+        <p>
+          <a href="/about">A propos de nous </a>
+        </p>
+        <p>
+          &copy; <span id="displayYear"></span> <a href="/conditions">Tout droits déservés </a><br><br>
+        </p>
+      </div>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="../static/js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script src="../static/js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- isotope js -->
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <!-- custom js -->
+  <script src="../static/js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+
+</body>
+
+</html>
