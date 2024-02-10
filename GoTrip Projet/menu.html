@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="../static/images/logo go trip.PNG" type="">
+
+  <title> GoTrip - Nos Destinations </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link href="../static/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="../static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="../static/css/responsive.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../static/css/signinsignup.css">
+
+  <script>
+    function checkPasswords() {
+      var pwd = document.getElementById("pwd");
+      var vpwd = document.getElementById("vpwd");
+
+      if (pwd.value !== vpwd.value) {
+        alert("Les mots de passe ne correspondent pas.");
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+  <style>
+    .navbar-nav li a {
+      font-size: 14px;
+      margin-right: 10px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .login-form input {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <div class="bg-box">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section" style="background-color: #00008b;">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="/index">
+            <span>
+              GoTrip
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  mx-auto ">
+              <li class="nav-item">
+                <a class="nav-link" href="/index">Accueil </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/menu">Notre Catalogue <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/comparaison">Comparaison des Pays</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/book">Réservation</a>
+              </li>
+            {% if connecter == False %}
+              <li class="nav-item">
+                <a class="nav-link" href="/formulaire/inscription">Inscription</a>
+              </li>
+            {% endif %}
+          </ul>
+            {% if connecter == True %}
+              <form class="login-form" action="http://127.0.0.1:5000/menu" method="post">
+                <div class="login-container" style="display: flex; align-items: center;">
+                  <img class="login-image" style="height: 30px;" src="../static/images/connexion.png" alt="">
+                  <p class="login-email" style="color: gold; margin: 0 8px;"><u>{{mail}}</u></p>
+                  <a class="login-link" style="color: gold;" href="/logout">Déconnexion</a>
+              </div>
+            </form>
+              {% else %}
+              <form class="login-form" action="http://127.0.0.1:5000/menu" method="post">
+                <input style="width: 200px ; height: 20px;" type="text" name="identifiant" placeholder="Identifiant" required>
+                <input style="width:200px ; height: 20px;" type="password" name="password" placeholder="Mot de passe" required>
+                <button style="display: flex; position: absolute; margin-left: 200px; height: 20px; font-size: 10px;" type="submit">Connexion</button>
+              </form>
+            {% endif %}
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+  <!-- food section -->
+
+  <section class="food_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Nos destinations
+        </h2>
+      </div>
+      <br>
+      <div>
+        <img id="TOUS" src="../static/images/CarteFinale.jpg" alt="" height="600px" class="centrer">
+      </div>
+      <ul class="filters_menu">
+         <li class="active" data-filter="*">Toutes nos Destinations</li>
+         <li id="NORD" data-filter=".nord">Europe du Nord</li>
+         <li id="EST" data-filter=".est">Europe de l'Est</li>
+         <li id="OUEST" data-filter=".ouest">Europe Occidentale</li>
+         <li id="SUD" data-filter=".sud">Europe méridionale</li>
+      </ul>
+
+      <div>
+        <div class="row grid">
+          <div class="col-sm-6 col-lg-4 all sud">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/albanie.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Albanie
+                  </h5>
+                  <p>
+                    Les paysages sont beaux et variés avec une belle côte rocheuse au sud, de belles plages à l’eau turquoise de la mer adriatique, plusieurs grands lacs à l’intérieur des terres, et de nombreux massifs montagneux.
+                  </p>
+                  <div class="options">
+                    <h6>
+                      Capitale : Tirana
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all ouest">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/berlin1.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Allemagne
+                  </h5>
+                  <p>
+                    Cette destination est appréciée notamment pour la beauté de son paysage, ses festivals et les nombreuses activités envisageables, qui sont quelques-unes des excellentes raisons pour partir en voyage en Allemagne.
+                  </p>
+                  <div class="options">
+                    <h6>
+                      Capitale : Berlin
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all ouest">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/austria.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Autriche
+                  </h5>
+                  <p>
+                    Pays au trois quarts montagneux, l’Autriche est un joyau européen totalement préservé. C’est un petit pays proche de nous, mais qui offre tout au voyageur curieux pour passer un excellent séjour.
+                  </p>
+                  <div class="options">
+                    <h6>
+                      Capitale : Vienne
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all ouest">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/belgique.jpeg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Belgique
+                  </h5>
+                  <p>
+                    Côté géographie, en Belgique pas de montagnes mais des forêts, peu de rivages marins mais une nature qui invite à la balade, surtout à vélo, et un concentré de richesses architeturales.
+                  </p>
+                  <div class="options">
+                    <h6>
+                      Capitale : Bruxelles
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all est">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/bulgarie.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Bulgarie
+                  </h5>
+                  <p>
+                    Terre de passage depuis toujours, carrefour d'influence de multiples civilisations dès l'Antiquité, le petit pays bulgare, peuplé de quelques 7 millions d'habitants, est un joyau pour les amateurs d'archéologie.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Sofia
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all sud">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/croatie.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Croatie
+                  </h5>
+                  <p>
+                    La Croatie allie la culture slave du sud avec des influences italiennes également depuis l’antiquité, un riche héritage historique avec des villes à taille humaine et des petites villes pleine de charme.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Zagreb
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all nord">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/danemark.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Danemark
+                  </h5>
+                  <p>
+                    Destination culturelle par excellence, le plus petit pays scandinave a beaucoup à offrir à ses visiteurs. Agréables à découvrir à vélo, les villes danoises respirent le calme et la douceur.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Copenhague
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all sud">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/espagne.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Espagne
+                  </h5>
+                  <p>
+                    L’Espagne présente une diversité géographique importante. Bordée par l’océan Atlantique, la mer Méditerranée et les Pyrénées, le climat varie selon les régions et les activités également.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Madrid
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all nord">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/estonie.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Estonie
+                  </h5>
+                  <p>
+                    Ce petit pays balte situé à proximité de la Finlande est une destination méconnue mais qui regorge pourtant de merveilles insoupçonnées à découvrir au fil des balades, laissant la curiosité guider les pas.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Tallinn
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all nord">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/finlande.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Finlande
+                  </h5>
+                  <p>
+                    D'Helsinki, la charmante capitale jusqu'aux latitudes arctiques de la Laponie, en passant par Rovaniemi (la ville du Père Noël!), le pays Suomi est une invitation à l'exploration et à la nature.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Helsinki
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all ouest">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/paris.jpeg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    France
+                  </h5>
+                  <p>
+                    Un voyage en France, c’est un voyage à la découverte d’un pays incroyablement riche, tant par son patrimoine que par sa culture, son histoire, sa géographie ou encore sa gastronomie.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Paris
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all sud">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/grece.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Grèce
+                  </h5>
+                  <p>
+                    Voyager en Grèce, c'est d'abord faire un voyage dans le temps et marcher sur les traces de l'une des plus brillantes civilisations de l'Antiquité mais aussi profiter d'un climat bien particulier, chaud et sec.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Athènes
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all est">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/hongrie.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Hongrie
+                  </h5>
+                  <p>
+                    Organisée tout autour du sinuant Danube, la Hongrie est un pays réputé pour sa tranquillité pastorale de son mode de vie, pour un voyage dans un univers calme et reposant.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Budapest
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all nord">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/irlande.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Irlande
+                  </h5>
+                  <p>
+                    Imaginez la beauté de la nature quand le soleil illumine un paysage rincé par la pluie quelques minutes auparavant… vous comprendrez alors qu’il n’y a pas que du mauvais dans un ciel gris.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Dublin
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all sud">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/Rome.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Italie
+                  </h5>
+                  <p>
+                    Pays de tous les contrastes, frontalier de la France, l'Italie est une destination de rêve qui attire, année après année, toujours plus de touristes avides de découvrir les richesses de cette destination.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Rome
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all nord">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/lettonie.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Lettonie
+                  </h5>
+                  <p>
+                    La Lettonie est probablement un des pays le plus méconnu et constitue pourtant une agréable surprise pour le voyageur qui sait aller au-delà des clichés et qui désire découvrir une destination attachante.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Riga
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all nord">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/lituanie.jpeg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Lituanie
+                  </h5>
+                  <p>
+                    Sur ce territoire recouvert de forêts épaisses, de lacs harmonieux et où les parcs naturels sont des merveilles, le voyageur averti et passionné fera des rencontres inoubliables.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Vilnius
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all ouest">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/lux.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Luxembourg
+                  </h5>
+                  <p>
+                    Pourquoi venir impérativement au Luxembourg ? Car vous pouvez y découvrir de nombreuses choses, dans un pays où les distances sont courtes et les impressions grandes.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Luxembourg
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all sud">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/Skopje.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Macédoine du Nord
+                  </h5>
+                  <p>
+                    Enclavée au milieu des Balkans, l'ancienne province yougoslave et sa capitale Skopje sont une destination qui abrite un important patrimoine culturel et des espaces naturels encore sauvage.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Skopje
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all sud">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/malte.png" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Malte
+                  </h5>
+                  <p>
+                    Partir à Malte, c'est aller à la découverte des secrets d’un chapelet d’îles, situées entre la Sicile et l'Afrique du Nord. Eté ou Hiver, le pays a tout ce qu'il faut pour accueillir les touristes.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : La Valette
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all nord">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/norvege.jpeg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Norvège
+                  </h5>
+                  <p>
+                    Pays de Dame Nature : la mer et les montagnes se rejoignent pour former des paysages sublimes. Parcs naturels, lacs, glaciers, forêts, mais également fjords sont constamment à l’honneur en Norvège.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Oslo
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all ouest">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/amsterdam.jpeg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Pays-Bas
+                  </h5>
+                  <p>
+                    Idéal pour passer quelques jours pas très loin de chez nous, un voyage aux Pays-Bas fait découvrir canaux, musées, moulins à vent et tulipes. De quoi se dépayser sans s'infliger de longues heures de voyage.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Amsterdam
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all est">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/Pologne.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Pologne
+                  </h5>
+                  <p>
+                    Vivante et dynamique, la Pologne présente un mélange saisissant entre modernisme et archaïsme qui constitue l'un de ses principaux atouts. Les villes offrent des spectacles très différents.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Varsovie
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all sud">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/portugal.jpeg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Portugal
+                  </h5>
+                  <p>
+                    Le Portugal est un pays fascinant. Ses châteaux centenaires, ses plages dorées, sa gastronomie très riche, ses activités plein air, sa culture et son histoire attirent chaque année des millions de touristes.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Lisbonne
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all est">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/prague.jpeg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    République Tchèque
+                  </h5>
+                  <p>
+                    Les visiteurs ont de nombreuses raisons de se rendre en République tchèque, qu’il s’agisse de visiter les châteaux tchèques , de goûter aux délicieuses bières du pays ou de se baigner dans un spa d’orge.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Prague
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all est">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/bucarest.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Roumanie
+                  </h5>
+                  <p>
+                    La Roumanie recèle bien des surprises ô combien inattendues et dont la seule évocation est une invitation au voyage : Bucarest, les Carpates, les villes saxonnes de Transylvanie ou le Delta du Danube.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Bucarest
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all est">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/slovaquie.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Slovaquie
+                  </h5>
+                  <p>
+                    La Slovaquie malgré sa petite taille compte un nombre assez impressionnant de parcs nationaux ou naturels, qui vous réservent une diversité de paysages tout à fait exceptionnels.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Bratislava
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all sud">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/slovenie.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Slovénie
+                  </h5>
+                  <p>
+                    La Slovénie est de plus en plus prisée par les voyageurs. Entre mer et montagne, et à seulement quelques heures de vol de Paris, la Slovénie vous promet une véritable bouffée d’air pur.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Ljubljana
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all nord">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/suede.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Suède
+                  </h5>
+                  <p>
+                    Entre étendues d’eau, immenses forêts de pins, troupeaux de rennes, aurores boréales, et châteaux royaux, la Suède offre un spectacle éblouissant de beauté et de naturel, notamment en Laponie
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Stockholm
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 all ouest">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="../static/images/suisse.jpg" alt="">
+                </div>
+                <div class="detail-box" style="background-color: #00008b;">
+                  <h5>
+                    Suisse
+                  </h5>
+                  <p>
+                    Voyager en Suisse, c’est découvrir un pays de vignobles, de sommets enneigés, de lacs majestueux et de forêts de sapins luxuriantes. Un séjour où la douceur de vivre règne en maître.
+                  </p>
+                   <div class="options">
+                    <h6>
+                      Capitale : Berne
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end food section -->
+
+  <!-- footer section -->
+  <footer class="footer_section" style="background-color: #00008b;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 footer-col">
+          <div class="footer_contact">
+            <h4>
+              Contact
+            </h4>
+            <div class="contact_link_box">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Toulouse, France
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  0641424217
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  contact.gotrip@gmail.com
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <div class="footer_detail">
+            <a href="" class="footer-logo">
+              GoTrip
+            </a>
+            <div class="footer_social">
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <h4>
+            Horaires d'ouverture
+          </h4>
+          <p>
+            Lundi au Samedi
+          </p>
+          <p>
+            8h - 20h
+          </p>
+        </div>
+      </div>
+      <div class="footer-info">
+        <p>
+          <a href="/about">A propos de nous </a>
+        </p>
+        <p>
+          &copy; <span id="displayYear"></span> <a href="/conditions">Tout droits déservés </a><br><br>
+        </p>
+      </div>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="../static/js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script src="../static/js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- isotope js -->
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <!-- custom js -->
+  <script src="../static/js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+
+</body>
+
+</html>
