@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="../static/images/logo go trip.PNG" type="">
+
+  <title> GoTrip </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="../static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="../static/css/responsive.css" rel="stylesheet" />
+
+  <script>
+    function checkPasswords() {
+      var pwd = document.getElementById("pwd");
+      var vpwd = document.getElementById("vpwd");
+
+      if (pwd.value !== vpwd.value) {
+        alert("Les mots de passe ne correspondent pas.");
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+  <style>
+    .navbar-nav li a {
+      font-size: 14px;
+      margin-right: 10px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .login-form input {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <div class="bg-box">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section" style="background-color: #00008b;">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="/index">
+            <span>
+              GoTrip
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  mx-auto ">
+              <li class="nav-item">
+                <a class="nav-link" href="/index">Accueil </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/menu">Notre Catalogue</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/comparaison">Comparaison des Pays</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/book">Réservation <span class="sr-only">(current)</span> </a>
+              </li>
+              {% if connecter == False %}
+                <li class="nav-item">
+                  <a class="nav-link" href="/formulaire/inscription">Inscription</a>
+                </li>
+              {% endif %}
+                <li>
+                {% if connecter == True %}
+                  <form class="login-form" action="/book" method="post">
+                    <div style="height: 30px; display: flex; position: absolute; right: 1%; margin-top: -15px;">
+                      <tr>
+                        <td rowspan="2">
+                          <img src="../static/images/connexion.png" alt="">
+                        </td>
+                        <td><p style="color: gold;"><u>{{mail}}</u></p></td>
+                      </tr>
+                      <tr>
+                        <td><a style="color: gold;" href="/logout">Déconexion</a></td>
+                      </tr>
+                    </div>
+                  </form>
+                  {% else %}
+                  <form class="login-form" action="http://127.0.0.1:5000/book" method="post">
+                    <input style="width: 200px ; height: 20px;" type="text" name="identifiant" placeholder="Identifiant" required>
+                    <input style="width:200px ; height: 20px;" type="password" name="password" placeholder="Mot de passe" required>
+                    <button style="display: flex; position: absolute; margin-left: 200px; height: 20px; font-size: 10px;" type="submit">Connexion</button>
+                  </form>
+                {% endif %}
+                </li>
+              </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- book section -->
+  {% if connecter == False %}
+  <section class="book_section layout_padding">
+    <div class="centre">
+      <div class="container" >
+        <div class="heading_container">
+          <h2>
+            Vous devez être connecté pour accéder à cette page et ainsi Réserver
+            Veuillez vous identifier via le formulaire situé en haut de la page ou créer un compte.
+          </h2>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% else %}
+  <section class="book_section layout_padding">
+    <div class="centre">
+      <div class="container" >
+        <div class="heading_container">
+          <h2>
+            Réserver un voyage
+          </h2>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form_container">
+              <form method="post" action="http://127.0.0.1:5000/book">
+                <div>
+                  <select name="nb" class="form-control nice-select wide" required>
+                    <option value="" disabled selected>
+                      Nombre de personnes qui prennent part au voyage ?
+                    </option>
+                    <option value="1">
+                      1
+                    </option>
+                    <option value="2">
+                      2
+                    </option>
+                    <option value="3">
+                      3
+                    </option>
+                    <option value="4">
+                      4
+                    </option>
+                    <option value="5">
+                      5
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <input name="datedebut" class="form-control" required type="text" placeholder="Date de départ" onfocus="(this.type='date')"/>
+                </div>
+                <div>
+                  <input name="datefin" type="text" class="form-control" required placeholder="Date de retour" onfocus="(this.type='date')"/>
+                </div>
+               <div>
+                  Choix : Pays <input type="radio" name="choix_base" id="pays" value="pays" onclick='cacherChoix2(choix2); cacher2(resaPays2);  cacherFait(resaFait); afficher1(resaPays1); cacherDurée2(durée2)' checked/>
+                  Circuit <input type="radio" name="choix_base" id="circuit" value="circuit" onclick='afficherChoix2(choix2); cacher1(resaPays1); cacher2(resaPays2);  cacherFait(resaFait); cacherDurée1(durée1); cacherDurée2(durée2)' />
+                </div>
+                <br>
+                <div id="choix2">
+                  Choix de circuit : Circuit Libre <input type="radio" id="choice" name="choix_circuit" value="libre" onclick='afficher1(resaPays1); afficher2(resaPays2); cacherFait(resaFait); afficherDurée1(durée1); afficherDurée2(durée2)' >
+                  Circuit éxistant <input type="radio" name="choix_circuit" id="nochoice" value="existant" onclick='afficherFait(resaFait); cacher1(resaPays1); cacher2(resaPays2);cacherDurée1(durée1); cacherDurée2(durée2)' >
+                </div>
+                <br>
+                <div id="resaPays1" >
+                   <select name="pays1" class="form-control nice-select wide">
+                     {% for element in listePaysOK %}
+                     <option>{{element}}</option>
+                     {% endfor %}
+                  </select>
+                  <input ID="durée1" name="durée1" type="number" class="form-control" placeholder="Nombre de jours prévu chez la destination 1" />
+                </div>
+                <div id="resaPays2" >
+                  <select name="pays2" class="form-control nice-select wide">
+                    {% for element in listePaysOK %}
+                    <option>{{element}}</option>
+                    {% endfor %}
+                  </select>
+                  <input ID="durée2" name="durée2" type="number" class="form-control" placeholder="Nombre de jours prévu chez la destination 1" />
+                </div>
+                <div id="resaFait">
+                  <select name="choixExistant" class="form-control nice-select wide">
+                    <option value="desti">Circuit éxistant</option>
+                    <option value="scan">Scandinavie (Norvège - Suède)</option>
+                    <option value="benelux">Benelux (Belgique - Pays-Bas)</option>
+                    <option value="ibere">Péninsule Ibérique (Espagne - Portugal)</option>
+                    <option value="baltes">Pays Baltes (Lituanie - Lettonie)</option>
+                    <option value="itaslo">Mer et Montagnes (Croatie - Slovénie)</option>
+                    <option value="est++">Traversée de l'Est (Pologne - Slovaquie)</option>
+                  </select>
+                </div>
+                <div id="condition">
+                  <input type="checkbox" id="condition" name="C2" required /> <a href="/conditions"> J'ai lu les conditions générales de vente.</a>
+                </div>
+              </br>
+                <div class="btn_box">
+                  <input name="Valider" type="submit" value="Valider">
+                  <input type="reset" value="Effacer"/>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-6 ">
+            <div class="img-box">
+              <img src="../static/images/resaIMAGE.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <hr>
+    </div>
+  </section>
+  {% endif %}
+  <!-- end book section -->
+
+  <!-- footer section -->
+  <footer class="footer_section" style="background-color: #00008b;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 footer-col">
+          <div class="footer_contact">
+            <h4>
+              Contact
+            </h4>
+            <div class="contact_link_box">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Toulouse, France
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  contact.gotrip@gmail.com
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <div class="footer_detail">
+            <a href="" class="footer-logo">
+              GoTrip
+            </a>
+            <div class="footer_social">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <h4>
+            Horaires d'ouverture
+          </h4>
+          <p>
+            Lundi au Samedi
+          </p>
+          <p>
+            8h - 20h
+          </p>
+        </div>
+      </div>
+      <div class="footer-info">
+        <p>
+          <a href="/about">A propos de nous </a>
+        </p>
+        <p>
+          &copy; <span id="displayYear"></span> <a href="/conditions">Tout droits déservés </a><br><br>
+        </p>
+      </div>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="../static/js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script src="../static/js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- isotope js -->
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <!-- custom js -->
+  <script src="../static/js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+
+</body>
+
+</html>
