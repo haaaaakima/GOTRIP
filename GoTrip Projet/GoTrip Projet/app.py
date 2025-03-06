@@ -1,16 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Apr 12 16:06:39 2023
 
-@author: tybal
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Apr 10 16:06:39 2023
-
-@author: tybal
-"""
 
 import sqlite3
 import os
