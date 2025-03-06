@@ -22,6 +22,7 @@
   * Démarrer le serveur Flask
       flask run
 
+
 Projet GoTrip
 
 GoTrip est une plateforme de voyage en ligne qui aide les visiteurs à trouver le road trip idéal en Europe, en fonction de leur budget et de leurs envies.
